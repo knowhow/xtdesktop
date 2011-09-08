@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>desktopCRM</class>
+ <widget class="QMainWindow" name="desktopCRM">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>893</width>
+    <height>554</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>CRM</string>
+  </property>
+  <property name="documentMode">
+   <bool>true</bool>
+  </property>
+  <property name="dockNestingEnabled">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0" colspan="3">
+     <widget class="QLabel" name="desktopCollaborateLit">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Corporate Relationship Management</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2">
+     <widget class="QGroupBox" name="_personalGroup">
+      <property name="title">
+       <string>Personal</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="2" column="0">
+        <widget class="MenuButton" name="_eventManager">
+         <property name="image">
+          <string notr="true">lamp_48</string>
+         </property>
+         <property name="label">
+          <string>Event Manager</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">sys.eventManager</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="MenuButton" name="_todoCalendar">
+         <property name="image">
+          <string notr="true">calendar_month_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>To Do Calendar</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">crm.todoListCalendar</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="MenuButton" name="_todo">
+         <property name="image">
+          <string notr="true">notepad_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>To Do List</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">crm.todoList</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="1" rowspan="2">
+     <widget class="QGroupBox" name="_corporateGroup">
+      <property name="title">
+       <string>Corporate</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="MenuButton" name="_accounts">
+         <property name="image">
+          <string notr="true">clients_48</string>
+         </property>
+         <property name="label">
+          <string>Accounts</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">crm.crmaccounts</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="MenuButton" name="_contacts">
+         <property name="image">
+          <string notr="true">execute_48</string>
+         </property>
+         <property name="label">
+          <string>Contacts</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">crm.contacts</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="MenuButton" name="_addresses">
+         <property name="image">
+          <string notr="true">book_48</string>
+         </property>
+         <property name="label">
+          <string>Address Book</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">crm.addresses</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QGroupBox" name="_preSalesGroup">
+      <property name="title">
+       <string>Pre-Sales</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="1" column="2">
+        <widget class="MenuButton" name="_prospects">
+         <property name="image">
+          <string notr="true">customers_help_48</string>
+         </property>
+         <property name="label">
+          <string>Prospects</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">so.prospects</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="MenuButton" name="_quotes">
+         <property name="image">
+          <string notr="true">order_help_48</string>
+         </property>
+         <property name="label">
+          <string>Quotes</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">so.listQuotes</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
+        <widget class="MenuButton" name="_quotesByItem">
+         <property name="image">
+          <string notr="true">order_search_48</string>
+         </property>
+         <property name="label">
+          <string>Quotes by Item</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">so.dspQuoteOrderLookupByItem</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="MenuButton" name="_opportunities">
+         <property name="image">
+          <string notr="true">money_bag_write_48</string>
+         </property>
+         <property name="label">
+          <string>Opportunities</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">crm.listOpportunity</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string>dspBillingSelections</string>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="3" rowspan="2">
+     <widget class="QGroupBox" name="_projectGroup">
+      <property name="title">
+       <string>Project</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="MenuButton" name="_projects">
+         <property name="image">
+          <string notr="true">spreadsheet_48</string>
+         </property>
+         <property name="label">
+          <string>Projects</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">pm.projects</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="MenuButton" name="_timeSheets">
+         <property name="image">
+          <string notr="true">time_sheet_write_48</string>
+         </property>
+         <property name="label">
+          <string>Time &amp; Expense</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">pm.teSheets</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="MenuButton" name="_projectOrders">
+         <property name="image">
+          <string notr="true">spreadsheet_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>Project Orders</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">pm.dspOrderActivityByProject</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QGroupBox" name="_accountGroup">
+      <property name="title">
+       <string>Account Management</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="1">
+        <widget class="MenuButton" name="_customer">
+         <property name="image">
+          <string notr="true">customers_48</string>
+         </property>
+         <property name="label">
+          <string>Customer Workbench</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">so.customerWorkbench</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="MenuButton" name="_incidents">
+         <property name="image">
+          <string notr="true">chat_48</string>
+         </property>
+         <property name="label">
+          <string>Incidents</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">crm.incidentList</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QDockWidget" name="_dockMytodo">
+   <property name="windowTitle">
+    <string>To Do</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="_dockTodoContents">
+    <layout class="QGridLayout" name="gridLayout_10">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="XTreeWidget" name="_todoList">
+       <property name="populateLinear">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="_dockMycontacts">
+   <property name="windowTitle">
+    <string>My Contacts</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="_dockMycontactsContents">
+    <layout class="QGridLayout" name="gridLayout_8">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="XTreeWidget" name="_contactList">
+       <property name="populateLinear">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="_dockMyaccounts">
+   <property name="windowTitle">
+    <string>My Accounts</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="_dockMyaccountsContent">
+    <layout class="QGridLayout" name="gridLayout_9">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="XTreeWidget" name="_accountList">
+       <property name="populateLinear">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MenuButton</class>
+   <extends>QWidget</extends>
+   <header>menubutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header>xtreewidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

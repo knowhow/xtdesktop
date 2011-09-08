@@ -1,0 +1,87 @@
+-- Group: desktop
+-- Name:  purchHist
+-- Notes: Summarized Purchase History for Desktop
+
+--------- VARIANCES -----------
+<? if exists("variances") ?> 
+SELECT <? literal("group_id") ?>, <? literal("group_number") ?>,  <? literal("group_name") ?>,
+  sum(qty) AS qty, sum(amount) AS amount,
+  'curr' AS amount_xtnumericrole,
+  'qty' AS qty_xtnumericrole,
+   0 AS amount_xttotalrole,
+   0 AS qty_xttotalrole
+FROM (
+SELECT vend_id, vend_number, vend_name,
+       pohead_agent_username, usr_propername,
+       COALESCE(item_id,-2) AS item_id, COALESCE(item_number,<? value("nonInv") ?>) AS item_number,
+       item_descrip1,
+       porecv_qty AS qty, 
+       currToBase(vohead_curr_id, sum(vodist_amount) / sum(vodist_qty), vohead_distdate) * porecv_qty - porecv_value AS amount
+FROM porecv
+  JOIN vendinfo ON (porecv_vend_id=vend_id)
+  LEFT OUTER JOIN (
+    itemsite JOIN item ON (itemsite_item_id=item_id) )
+    ON (porecv_itemsite_id=itemsite_id)
+  JOIN vodist ON ((vodist_poitem_id=porecv_poitem_id) 
+              AND (vodist_vohead_id=porecv_vohead_id))
+  JOIN vohead ON ((vodist_vohead_id=vohead_id) 
+              AND (vohead_posted))
+  JOIN poitem ON (porecv_poitem_id=poitem_id)
+  JOIN pohead ON (poitem_pohead_id=pohead_id)
+  LEFT OUTER JOIN usr ON (pohead_agent_username=usr_username)
+WHERE (vohead_distdate BETWEEN <? value("startDate") ?> AND <? value("endDate") ?>)
+GROUP BY porecv_qty, porecv_value, vohead_curr_id, vohead_distdate,
+  vend_id, vend_number, vend_name,
+  pohead_agent_username, usr_propername,
+  item_id, item_number, item_descrip1
+) data
+WHERE (amount > 0)
+GROUP BY <? literal("group_id") ?>, <? literal("group_number") ?>, <? literal("group_name") ?>
+
+--------- RECEIPTS -------
+<? elseif exists("receipts") ?> 
+SELECT <? literal("group_id") ?>, <? literal("group_number") ?>,  <? literal("group_name") ?>,
+       sum(amount) as amount, sum(qty) AS qty,
+       'curr' AS amount_xtnumericrole,
+       'qty' AS qty_xtnumericrole,
+       0 AS amount_xttotalrole,
+       0 AS qty_xttotalrole
+FROM (
+  SELECT vend_id, vend_number, vend_name,
+         pohead_agent_username, usr_propername,
+         COALESCE(item_id,-2) AS item_id, COALESCE(item_number,<? value("nonInv") ?>) AS item_number,
+         item_descrip1,
+         coalesce(recv_value,0) AS amount,
+         recv_qty AS qty
+  FROM recv
+    JOIN vendinfo ON (vend_id=recv_vend_id)
+    LEFT OUTER JOIN (
+      itemsite JOIN item ON (itemsite_item_id=item_id) )
+      ON (recv_itemsite_id=itemsite_id)
+    JOIN poitem ON (recv_orderitem_id=poitem_id)
+    JOIN pohead ON (poitem_pohead_id=pohead_id)
+    LEFT OUTER JOIN usr ON (pohead_agent_username=usr_username)
+  WHERE ((recv_date::date BETWEEN <? value("startDate") ?> AND <? value("endDate") ?>)
+    AND (recv_posted)
+    AND (recv_order_type = 'PO'))
+  UNION ALL
+  SELECT vend_id, vend_number, vend_name,
+         pohead_agent_username, usr_propername,
+         COALESCE(item_id,-1) AS item_id, COALESCE(item_number,<? value("nonInv") ?>) AS item_number,
+         item_descrip1,
+         coalesce(poreject_value,0) * -1 AS amount,
+         poreject_qty * -1 AS qty
+  FROM poreject
+    JOIN vendinfo ON (vend_id=poreject_vend_id)
+    JOIN itemsite ON (itemsite_id=poreject_itemsite_id)
+    JOIN item ON (item_id=itemsite_item_id)
+    JOIN poitem ON (poreject_poitem_id=poitem_id)
+    JOIN pohead ON (poitem_pohead_id=pohead_id)
+    LEFT OUTER JOIN usr ON (pohead_agent_username=usr_username)
+  WHERE ((poreject_date::date BETWEEN <? value("startDate") ?> AND <? value("endDate") ?>)
+    AND (poreject_posted))
+) data
+GROUP BY <? literal("group_id") ?>, <? literal("group_number") ?>, <? literal("group_name") ?>
+ORDER BY <? literal("group_number") ?>
+;
+<? endif ?>

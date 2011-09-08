@@ -1,0 +1,129 @@
+-- Group: desktop
+-- Name:  salesAct
+-- Notes: 
+
+SELECT 'Q' AS activity, <? value("quotes") ?> AS activity_qtdisplayrole, 0 AS seq,
+  COUNT(quhead_id) AS count, COALESCE(sum(amount),0) AS amount, 'curr' AS amount_xtnumericrole   
+FROM 
+ (SELECT quhead_id,
+    SUM(round((noNeg(quitem_qtyord) * quitem_qty_invuomratio) *            
+        (currToBase(quhead_curr_id, quitem_price, quhead_quotedate) / quitem_price_invuomratio), 2) ) AS amount
+     FROM quitem
+       JOIN quhead ON (quitem_quhead_id=quhead_id)
+     WHERE ( COALESCE(quhead_expire,current_date + 1) > current_date  )
+   GROUP BY quhead_id) data
+HAVING (COUNT(quhead_id) > 0)
+UNION 
+SELECT 'O' AS activity, <? value("open") ?> AS activity_qtdisplayrole,  1 AS seq,   
+  COUNT(cohead_id) AS count, COALESCE(sum(amount),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM
+  (SELECT cohead_id,
+    SUM(round((noNeg(coitem_qtyord - coitem_qtyshipped + coitem_qtyreturned) * coitem_qty_invuomratio) *            
+        (currToBase(cohead_curr_id, coitem_price, cohead_orderdate) / coitem_price_invuomratio), 2) ) AS amount
+     FROM coitem
+       JOIN cohead ON (coitem_cohead_id=cohead_id)
+     WHERE ( coitem_status = 'O' )
+   GROUP BY cohead_id) data
+HAVING (COUNT(cohead_id) > 0)
+UNION
+SELECT 'P' AS activity, <? value("print") ?> AS activity_qtdisplayrole, 2 AS seq,   
+  COUNT(cohead_id) AS count, COALESCE(sum(amount),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM
+  (SELECT cohead_id,
+    SUM(round((noNeg(coitem_qtyord - coitem_qtyshipped + coitem_qtyreturned) * coitem_qty_invuomratio) *            
+        (currToBase(cohead_curr_id, coitem_price, cohead_orderdate) / coitem_price_invuomratio), 2) ) AS amount
+     FROM coitem
+       JOIN cohead ON (coitem_cohead_id=cohead_id)
+       JOIN pack ON ((pack_head_type='SO')
+                 AND (pack_head_id=cohead_id))
+     WHERE ( (coitem_status = 'O')
+      AND (NOT pack_printed) )
+   GROUP BY cohead_id) data
+HAVING (COUNT(cohead_id) > 0)
+UNION
+SELECT 'S' AS activity, <? value("ship") ?> AS activity_qtdisplayrole, 3 AS seq,   
+  COUNT(cohead_id) AS count, COALESCE(sum(amount),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM
+  (SELECT cohead_id,
+    SUM(round((shipitem_qty * coitem_qty_invuomratio) *            
+        (currToBase(cohead_curr_id, coitem_price, cohead_orderdate) / coitem_price_invuomratio), 2) ) AS amount
+     FROM coitem
+       JOIN cohead ON (coitem_cohead_id=cohead_id)
+       JOIN shipitem ON (shipitem_orderitem_id=coitem_id)
+       JOIN shiphead ON ((shiphead_order_type='SO')
+                    AND (shipitem_shiphead_id=shiphead_id))
+     WHERE ( (coitem_status = 'O')
+      AND (NOT shiphead_shipped) )
+   GROUP BY cohead_id) data
+HAVING (COUNT(cohead_id) > 0)
+UNION
+SELECT 'B' AS activity, <? value("bill") ?> AS activity_qtdisplayrole, 4 AS seq,   
+  COUNT(cohead_id) AS count, COALESCE(sum(amount),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM
+  (SELECT cohead_id,
+     CASE WHEN ( 
+      -- For kits only when entire kit has shipped
+      item_type != 'K' OR NOT coitem_id IN (
+        SELECT sub.coitem_id
+          FROM coitem sub
+         WHERE((sub.coitem_cohead_id=coitem_cohead_id)
+           AND (sub.coitem_linenumber=coitem_linenumber)
+           AND (sub.coitem_subnumber > 0)
+           AND ((sub.coitem_qtyord - sub.coitem_qtyshipped + sub.coitem_qtyreturned) > 0))
+      )) THEN
+      -- Total shipped not invoiced minus any already selected for billing not invoiced
+      SUM(round(((shipitem_qty -
+      COALESCE((SELECT sum(cobill_qty) 
+                FROM cobill 
+                WHERE ((cobill_coitem_id=coitem_id 
+                  AND (cobill_invcitem_id IS NULL)
+                  ))),0) 
+       * coitem_qty_invuomratio) *            
+          (currToBase(cohead_curr_id, coitem_price, cohead_orderdate) / coitem_price_invuomratio)),2))
+     ELSE 0
+     END AS amount
+     FROM coitem
+       JOIN itemsite ON (coitem_itemsite_id=itemsite_id)
+       JOIN item ON (itemsite_item_id=item_id)
+       JOIN cohead ON (coitem_cohead_id=cohead_id)
+       JOIN custinfo ON (cust_id=cohead_cust_id)
+       JOIN shipitem ON (shipitem_orderitem_id=coitem_id)
+       JOIN shiphead ON ((shiphead_order_type='SO')
+                 AND (shiphead_id=shipitem_shiphead_id))
+     WHERE ( (coitem_cohead_id=cohead_id)
+      AND (coitem_status = 'O')
+      AND (shiphead_shipped)
+      AND (NOT shipitem_invoiced)
+      AND (shipitem_qty > COALESCE((SELECT sum(cobill_qty)
+                                    FROM cobill
+                                    WHERE cobill_coitem_id=coitem_id AND cobill_invcitem_id IS NULL), 0)) )
+   GROUP BY cohead_id, coitem_id, coitem_qtyord, coitem_qtyshipped, coitem_qtyreturned, 
+            cust_partialship, item_type) data
+HAVING (COUNT(cohead_id) > 0)
+UNION
+SELECT 'I' AS activity, <? value("invoice") ?> AS activity_qtdisplayrole, 5 AS seq,   
+  COUNT(cohead_id) AS count, COALESCE(sum(amount),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM
+  (SELECT cohead_id,
+    SUM(round((cobill_qty * coitem_qty_invuomratio) *            
+        (currToBase(cohead_curr_id, coitem_price, cohead_orderdate) / coitem_price_invuomratio), 2) ) AS amount
+     FROM coitem
+       JOIN cohead ON (coitem_cohead_id=cohead_id)
+       JOIN cobill ON (cobill_coitem_id=coitem_id)
+     WHERE ( (coitem_status = 'O')
+      AND (cobill_invcitem_id IS NULL) )
+   GROUP BY cohead_id) data
+HAVING (COUNT(cohead_id) > 0)
+UNION
+SELECT 'T' AS activity, <? value("post") ?> AS activity_qtdisplayrole, 5 AS seq,   
+  COUNT(invchead_id) AS count, COALESCE(sum(amount),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM
+  (SELECT invchead_id,
+    SUM(round((invcitem_billed * invcitem_qty_invuomratio) * (invcitem_price / COALESCE(invcitem_price_invuomratio,1)),2)
+ ) AS amount
+     FROM invcitem
+       JOIN invchead ON (invcitem_invchead_id=invchead_id)
+     WHERE ( NOT invchead_posted )
+   GROUP BY invchead_id) data
+HAVING (COUNT(invchead_id) > 0)
+ORDER BY seq;

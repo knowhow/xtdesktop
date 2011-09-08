@@ -1,0 +1,14 @@
+-- Group: desktop
+-- Name:  userOnline
+-- Notes: 
+SELECT usr_id, usr_username, usr_propername, usr_email,
+       min(backend_start) AS client_start, max(query_start) AS query_start,
+       sum(CASE WHEN(database IS NULL) THEN 0 ELSE 1 END) AS cnt_internal,
+       sum(CASE WHEN(database IS NULL) THEN 1 ELSE 0 END) AS cnt_external,
+       client_addr, '0' AS cnt_internal_xttotalrole, '0' AS cnt_external_xttotalrole
+  FROM pg_stat_activity
+  JOIN usr ON (usr_id=usesysid)
+  LEFT OUTER JOIN pg_locks ON (database=datid AND classid=datid AND objid=procpid AND objsubid=2)
+ WHERE(datname=current_database())
+ GROUP BY usr_id, usr_username, usr_propername, usr_email,
+          client_addr, cnt_internal_xttotalrole, cnt_external_xttotalrole;

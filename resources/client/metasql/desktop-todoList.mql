@@ -1,0 +1,87 @@
+-- Group: desktop
+-- Name:  todoList
+-- Notes: 
+
+------ TO DO ITEMS-------
+  SELECT todoitem_id AS id, 1 AS altId, todoitem_owner_username AS owner, 
+         <? value("todo") ?> AS type, incdtpriority_order AS seq,
+         incdtpriority_name AS priority, 
+         todoitem_name AS name, 
+         firstLine(todoitem_description) AS descrip, 
+         todoitem_status AS status, todoitem_start_date as start, 
+         todoitem_due_date AS due, 
+         todoitem_username AS usr, CAST(incdt_number AS text) AS number,
+         crmacct_number, crmacct_name, 
+         cust_number AS cust,
+         CASE WHEN (todoitem_status != 'C'AND 
+                    todoitem_due_date < CURRENT_DATE) THEN 'expired'
+              WHEN (todoitem_status != 'C'AND 
+                    todoitem_due_date > CURRENT_DATE) THEN 'future'
+         END AS due_qtforegroundrole 
+    FROM todoitem LEFT OUTER JOIN incdt ON (incdt_id=todoitem_incdt_id) 
+                  LEFT OUTER JOIN crmacct ON (crmacct_id=todoitem_crmacct_id) 
+                  LEFT OUTER JOIN cust ON (cust_id=crmacct_cust_id) 
+                  LEFT OUTER JOIN incdtpriority ON (incdtpriority_id=todoitem_priority_id) 
+   WHERE ((todoitem_active)
+      AND (todoitem_status != 'C')
+      AND ((todoitem_owner_username=<? value("owner_username") ?>) 
+      OR (todoitem_username=<? value("assigned_username") ?>))) 
+  UNION 
+------ INCIDENTS ------
+  SELECT incdt_id AS id, 2 AS altId, incdt_owner_username AS owner, 
+         <? value("incident") ?> AS type, incdtpriority_order AS seq,
+         incdtpriority_name AS priority, 
+         incdt_summary AS name, 
+         firstLine(incdt_descrip) AS descrip, 
+         incdt_status AS status, CAST(incdt_timestamp AS date) AS start, 
+         null AS due, 
+         incdt_assigned_username AS usr, CAST(incdt_number AS text) AS number,
+         crmacct_number, crmacct_name,
+         cust_number AS cust, 
+         NULL AS due_qtforegroundrole 
+    FROM incdt LEFT OUTER JOIN crmacct ON (crmacct_id=incdt_crmacct_id) 
+               LEFT OUTER JOIN cust ON (cust_id=crmacct_cust_id) 
+               LEFT OUTER JOIN incdtpriority ON (incdtpriority_id=incdt_incdtpriority_id) 
+   WHERE ((incdt_status != 'L')
+      AND ((incdt_owner_username=<? value("owner_username") ?>) 	  
+      OR (incdt_assigned_username=<? value("assigned_username") ?>)))
+------ TASKS ------
+   UNION 
+    SELECT prjtask_id AS id, 3 AS altId, prjtask_owner_username AS owner, 
+           <? value("task") ?> AS type, NULL AS seq, NULL AS priority, 
+           prjtask_number || '-' || prjtask_name AS name, 
+           firstLine(prjtask_descrip) AS descrip, 
+           prjtask_status AS status,  prjtask_start_date AS start, 
+           prjtask_due_date AS due, 
+           prjtask_username AS usr, prj_number,
+           '' AS crmacct_number, '' AS crmacct_name, '' AS cust, 
+           CASE WHEN (prjtask_status != 'C'AND 
+                      prjtask_due_date < CURRENT_DATE) THEN 'expired'
+                WHEN (prjtask_status != 'C'AND 
+                      prjtask_due_date > CURRENT_DATE) THEN 'future'
+           END AS due_qtforegroundrole 
+      FROM prj, prjtask 
+     WHERE((prj_id=prjtask_prj_id) 
+      AND (prjtask_status != 'C')
+      AND ((prjtask_owner_username=<? value("owner_username") ?>) 
+      OR (prjtask_username=<? value("assigned_username") ?>))) 
+------ PROJECTS ------
+    UNION 
+    SELECT prj_id AS id, 4 AS altId, prj_owner_username AS owner, 
+           <? value("project") ?> AS type, NULL AS seq, NULL AS priority, 
+           prj_number || '-' || prj_name AS name, 
+           firstLine(prj_descrip) AS descrip, 
+           prj_status AS status,  prj_start_date AS start, 
+           prj_due_date AS due, 
+           prj_username AS usr, NULL AS number,
+           '' AS crmacct_number, '' AS crmacct_name,'' AS cust, 
+           CASE WHEN (prj_status != 'C'AND 
+                      prj_due_date < CURRENT_DATE) THEN 'expired'
+                WHEN (prj_status != 'C'AND 
+                      prj_due_date > CURRENT_DATE) THEN 'future'
+           END AS due_qtforegroundrole 
+      FROM prj 
+     WHERE ((prj_status != 'C')
+        AND ((prj_owner_username=<? value("owner_username") ?>) 
+        OR (prj_username=<? value("assigned_username") ?>)))
+ORDER BY due, seq, usr; 

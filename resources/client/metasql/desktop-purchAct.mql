@@ -1,0 +1,74 @@
+-- Group: desktop
+-- Name:  purchAct
+-- Notes: 
+
+<? if exists("planned") ?> 
+SELECT 'L' AS activity, <? value("planned") ?> AS activity_qtdisplayrole, 0 AS seq,
+  COUNT(planord_id) AS count, COALESCE(sum(stdcost(item_id) * planord_qty),0) AS amount, 
+  'curr' AS amount_xtnumericrole
+FROM planord
+  JOIN itemsite ON (planord_itemsite_id = itemsite_id)
+  JOIN item ON (itemsite_item_id = item_id)
+WHERE (planord_type = 'P')
+HAVING (COUNT(planord_id) > 0)
+UNION
+<? endif ?>
+SELECT 'Q' AS activity, <? value("request") ?> AS activity_qtdisplayrole, 2 AS seq,
+  COUNT(pr_id) AS count, COALESCE(sum(stdcost(item_id) * pr_qtyreq),0) AS amount, 
+  'curr' AS amount_xtnumericrole
+FROM pr
+  JOIN itemsite ON (pr_itemsite_id = itemsite_id)
+  JOIN item ON (itemsite_item_id = item_id)
+HAVING (COUNT(pr_id) > 0)
+UNION
+SELECT 'U' AS activity, <? value("unreleased") ?> AS activity_qtdisplayrole, 3 AS seq,   
+  COUNT(pohead_id) AS count, COALESCE(sum(amount),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM
+  (SELECT pohead_id,
+    SUM(round((noNeg(poitem_qty_ordered - poitem_qty_received + poitem_qty_returned)) *            
+        currToBase(pohead_curr_id, poitem_unitprice, pohead_orderdate), 2) ) AS amount
+     FROM poitem
+       JOIN pohead ON (poitem_pohead_id=pohead_id)
+     WHERE (pohead_status = 'U')
+   GROUP BY pohead_id) data
+HAVING (COUNT(pohead_id) > 0)
+UNION
+SELECT 'O' AS activity, <? value("open") ?> AS activity_qtdisplayrole, 4 AS seq,   
+  COUNT(pohead_id) AS count, COALESCE(sum(amount),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM
+  (SELECT pohead_id,
+    SUM(round((noNeg(poitem_qty_ordered - poitem_qty_received + poitem_qty_returned)) *            
+        currToBase(pohead_curr_id, poitem_unitprice, pohead_orderdate), 2) ) AS amount
+     FROM poitem
+       JOIN pohead ON (poitem_pohead_id=pohead_id)
+     WHERE (pohead_status = 'O')
+   GROUP BY pohead_id) data
+HAVING (COUNT(pohead_id) > 0)
+UNION
+SELECT 'A' AS activity, <? value("receiving") ?> AS activity_qtdisplayrole, 5 AS seq,   
+  COUNT(recv_id) AS count, COALESCE(sum(recv_value),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM recv
+WHERE (NOT recv_posted)
+HAVING (COUNT(recv_id) > 0)
+UNION
+SELECT 'V' AS activity, <? value("received") ?> AS activity_qtdisplayrole, 6 AS seq,   
+  COUNT(recv_id) AS count, COALESCE(sum(recv_value),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM recv
+WHERE ((recv_posted)
+  AND (NOT recv_invoiced)
+  AND (recv_vohead_id IS NULL)
+  AND (recv_order_type = 'PO'))
+HAVING (COUNT(recv_id) > 0)
+UNION
+SELECT 'I' AS activity, <? value("vouchered") ?> AS activity_qtdisplayrole, 7 AS seq,   
+  COUNT(vohead_id) AS count, COALESCE(sum(amount),0) AS amount, 'curr' AS amount_xtnumericrole
+FROM
+  (SELECT vohead_id,
+    SUM(round(currToBase(vohead_curr_id, vodist_amount, vohead_docdate), 2) ) AS amount
+     FROM vohead
+       JOIN vodist ON (vodist_vohead_id=vohead_id)
+     WHERE ((vohead_pohead_id != -1)
+       AND (NOT vohead_posted))
+   GROUP BY vohead_id) data
+HAVING (COUNT(vohead_id) > 0)
+ORDER BY seq;

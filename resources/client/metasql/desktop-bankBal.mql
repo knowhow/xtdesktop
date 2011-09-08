@@ -1,0 +1,23 @@
+-- Group: desktop
+-- Name:  bankBal
+-- Notes: 
+
+-- Forward update balances if applicable
+SELECT forwardUpdateAccount(bankaccnt_accnt_id) AS result 
+FROM bankaccnt 
+WHERE (NOT fetchmetricbool('ManualForwardUpdate'));
+
+-- Return results
+SELECT bankaccnt_id, bankaccnt_name, trialbal_ending * -1 AS balance,
+  'curr' AS balance_xtnumericrole
+FROM bankaccnt
+ JOIN accnt ON (bankaccnt_accnt_id=accnt_id)
+ JOIN trialbal ON (accnt_id=trialbal_accnt_id)
+ JOIN (SELECT period_id
+       FROM period
+       JOIN yearperiod ON (period_yearperiod_id=yearperiod_id)
+       WHERE (period_start <= current_date)
+       ORDER BY yearperiod_end desc, period_number desc
+       LIMIT 1) data
+   ON (trialbal_period_id=period_id)
+ORDER BY bankaccnt_name;

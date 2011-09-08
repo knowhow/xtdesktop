@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>desktopManufacture</class>
+ <widget class="QMainWindow" name="desktopManufacture">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>882</width>
+    <height>554</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Manufacture</string>
+  </property>
+  <property name="documentMode">
+   <bool>true</bool>
+  </property>
+  <property name="dockNestingEnabled">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="desktopManufactureLit">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Manufacture</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="_planGroup">
+      <property name="title">
+       <string>Plan</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="MenuButton" name="_inventoryAvail">
+         <property name="image">
+          <string notr="true">inventory_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>Inventory Availability</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">im.dspInventoryAvailability</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="XLabel" name="_arrow_1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="image">
+          <string notr="true">ImgRightArrow</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="MenuButton" name="_newWo">
+         <property name="image">
+          <string notr="true">industry_add_48</string>
+         </property>
+         <property name="label">
+          <string>Create Work Order</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.newWorkOrder</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="XLabel" name="_arrow_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="image">
+          <string notr="true">ImgRightArrow</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="MenuButton" name="_maintainMaterial">
+         <property name="image">
+          <string notr="true">availability_write_48</string>
+         </property>
+         <property name="label">
+          <string>Material Requirements</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.maintainWoMaterialRequirements</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="XLabel" name="_arrow_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="image">
+          <string notr="true">ImgRightArrow</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="8">
+        <widget class="MenuButton" name="_releaseWo">
+         <property name="image">
+          <string notr="true">industry_next_48</string>
+         </property>
+         <property name="label">
+          <string>Release</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.releaseWorkOrdersByPlannerCode</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="MenuButton" name="_printWo">
+         <property name="image">
+          <string notr="true">printer_48</string>
+         </property>
+         <property name="label">
+          <string>Print</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.printTraveler</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="7">
+        <widget class="XLabel" name="_arrow_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="image">
+          <string notr="true">ImgRightArrow</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QGroupBox" name="_processGroup">
+      <property name="title">
+       <string>Process</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="5">
+        <widget class="XLabel" name="_arrow_6">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="image">
+          <string notr="true">ImgRightArrow</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="12">
+        <widget class="XLabel" name="_arrow_8">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="image">
+          <string notr="true">ImgRightArrow</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="MenuButton" name="_issueMatl">
+         <property name="image">
+          <string notr="true">barcode_ok_48</string>
+         </property>
+         <property name="label">
+          <string>Issue Material</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.issueWoMaterialItem</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="13">
+        <widget class="MenuButton" name="_closeWo">
+         <property name="image">
+          <string notr="true">industry_close_48</string>
+         </property>
+         <property name="label">
+          <string>Close Work Order</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.closeWorkOrder</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="MenuButton" name="_returnMatl">
+         <property name="image">
+          <string notr="true">barcode_back_48</string>
+         </property>
+         <property name="label">
+          <string>Return Material</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.returnWoMaterialItem</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="XLabel" name="_arrow_5">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="image">
+          <string notr="true">ImgRightArrow</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="8">
+        <widget class="XLabel" name="_arrow_7">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="image">
+          <string notr="true">ImgRightArrow</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="9">
+        <widget class="MenuButton" name="_woCost">
+         <property name="image">
+          <string notr="true">coin_stack_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>Costing</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.dspJobCosting</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="13">
+        <widget class="MenuButton" name="_woHistory">
+         <property name="image">
+          <string notr="true">history_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>History</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.dspWoHistoryByClassCode</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="MenuButton" name="_postProduction">
+         <property name="image">
+          <string notr="true">industry_ok_48</string>
+         </property>
+         <property name="label">
+          <string>Post Production</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.postProduction</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="9">
+        <widget class="MenuButton" name="_scrap">
+         <property name="image">
+          <string notr="true">trash_ok_48</string>
+         </property>
+         <property name="label">
+          <string>Post Scrap</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.scrapWoMaterialFromWo</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="MenuButton" name="_workOrderSchedule">
+         <property name="image">
+          <string notr="true">industry_clock_48</string>
+         </property>
+         <property name="label">
+          <string>Order Schedule</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.dspWoSchedule</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="MenuButton" name="_woAvail">
+         <property name="image">
+          <string notr="true">availability_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>Material Availability</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.dspInventoryAvailabilityByWorkOrder</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="6">
+        <widget class="MenuButton" name="_correctProdPost">
+         <property name="image">
+          <string notr="true">industry_back_48</string>
+         </property>
+         <property name="label">
+          <string>Correct Production</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">wo.correctProductionPosting</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QDockWidget" name="_dockMfgAct">
+   <property name="allowedAreas">
+    <set>Qt::AllDockWidgetAreas</set>
+   </property>
+   <property name="windowTitle">
+    <string>Manufacture Activities</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="_dockMfgActContents">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="XTreeWidget" name="_mfgAct">
+       <property name="populateLinear">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="_dockMfgHist">
+   <property name="windowTitle">
+    <string>Manufacture History</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="_dockMfgHistContents">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>3</number>
+     </property>
+     <item row="0" column="0" colspan="3">
+      <widget class="XTreeWidget" name="_mfgHist">
+       <property name="populateLinear">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="_label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>label</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="_button1">
+       <property name="maximumSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>b</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="_button2">
+       <property name="maximumSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>b</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="_dockMfgOpen">
+   <property name="allowedAreas">
+    <set>Qt::AllDockWidgetAreas</set>
+   </property>
+   <property name="windowTitle">
+    <string>Work Orders</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="_dockMfgOpenContents">
+    <layout class="QGridLayout" name="gridLayout_4">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="XTreeWidget" name="_mfgOpen">
+       <property name="populateLinear">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MenuButton</class>
+   <extends>QWidget</extends>
+   <header>menubutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XLabel</class>
+   <extends>QLabel</extends>
+   <header>xlabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header>xtreewidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

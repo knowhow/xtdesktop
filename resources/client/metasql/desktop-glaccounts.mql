@@ -1,0 +1,13 @@
+-- Group: desktop
+-- Name:  glaccounts
+-- Notes: 
+SELECT accnt_id, formatGlAccount(accnt_id) AS accnt_id_qtdisplayrole, 
+  accnt_descrip, accnt_type,
+  CASE WHEN(accnt_type='A') THEN <? value("asset") ?>
+  WHEN(accnt_type='E') THEN <? value("expense") ?>
+  WHEN(accnt_type='L') THEN <? value("liability") ?>
+  WHEN(accnt_type='Q') THEN <? value("equity") ?>
+  WHEN(accnt_type='R') THEN <? value("revenue") ?>
+  ELSE accnt_type
+END AS accnt_type_qtdisplayrole 
+FROM accnt;	

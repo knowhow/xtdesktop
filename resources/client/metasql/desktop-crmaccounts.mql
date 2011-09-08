@@ -1,0 +1,11 @@
+-- Group: desktop
+-- Name:  crmaccounts
+-- Notes: 
+SELECT 
+  crmacct_id AS id, crmacct_number, crmacct_name,
+  cntct.*, addr.*
+FROM crmacct 
+  LEFT OUTER JOIN cntct ON (crmacct_cntct_id_1=cntct_id) 
+  LEFT OUTER JOIN addr ON (cntct_addr_id=addr_id) 
+WHERE (crmacct_owner_username=current_user)
+ORDER BY crmacct_number;

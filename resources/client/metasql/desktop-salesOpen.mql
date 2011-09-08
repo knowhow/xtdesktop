@@ -1,0 +1,38 @@
+-- Group: desktop
+-- Name:  salesOpen
+-- Notes: 
+SELECT cohead_id, cohead_number, cust_number, cohead_shipvia, 
+  cohead_billtoname, 
+  formatCntctName(cohead_billto_cntct_honorific, 
+                  cohead_billto_cntct_first_name, 
+                  cohead_billto_cntct_middle, 
+                  cohead_billto_cntct_last_name, 
+                  cohead_billto_cntct_suffix) AS billto_cntct, 
+  cohead_billto_cntct_phone,
+  cohead_shiptoname, 
+  formatCntctName(cohead_shipto_cntct_honorific, 
+                  cohead_shipto_cntct_first_name, 
+                  cohead_shipto_cntct_middle, 
+                  cohead_shipto_cntct_last_name, 
+                  cohead_shipto_cntct_suffix) AS shipto_cntct, 
+  cohead_shipto_cntct_phone,
+  min(coitem_scheddate) AS scheddate, 
+  sum(round((noNeg(coitem_qtyord - coitem_qtyshipped + coitem_qtyreturned) * coitem_qty_invuomratio) *            
+     (currToBase(cohead_curr_id, coitem_price, cohead_orderdate) / coitem_price_invuomratio), 2) ) AS amount,
+  CASE WHEN (min(coitem_scheddate) <= current_date) THEN 'error' 
+  ELSE 'emphasis' END AS scheddate_qtforegroundrole,
+  'curr' AS amount_xtnumericrole
+FROM cohead 
+  JOIN custinfo ON (cohead_cust_id=cust_id) 
+  JOIN coitem ON (coitem_cohead_id=cohead_id) 
+  JOIN itemsite ON (coitem_itemsite_id=itemsite_id) 
+  JOIN whsinfo ON (itemsite_warehous_id=warehous_id) 
+WHERE (coitem_status='O')
+GROUP BY cohead_shipvia, cohead_billtoname, cohead_billto_cntct_id, cohead_billto_cntct_phone, 
+  cohead_shiptoname, cohead_shipto_cntct_id, cohead_shipto_cntct_phone, cohead_id, cohead_number, 
+  cust_number, cohead_billtoname, cohead_shiptoname, 
+  cohead_billto_cntct_honorific, cohead_billto_cntct_first_name, 
+  cohead_billto_cntct_middle, cohead_billto_cntct_last_name, cohead_billto_cntct_suffix,
+  cohead_shipto_cntct_honorific, cohead_shipto_cntct_first_name, cohead_shipto_cntct_middle, 
+  cohead_shipto_cntct_last_name, cohead_shipto_cntct_suffix
+ORDER BY cohead_number;

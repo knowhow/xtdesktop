@@ -1,0 +1,281 @@
+-- Group: desktop
+-- Name:  pkgItems
+-- Notes: 
+SELECT *,
+       CASE WHEN pkgitem_type='P' THEN <? value("package") ?>
+            WHEN pkgitem_type='C' THEN <? value("script") ?>
+            WHEN pkgitem_type='D' THEN <? value("cmd") ?>
+            WHEN pkgitem_type='F' THEN <? value("procedure") ?>
+            WHEN pkgitem_type='G' THEN <? value("trigger") ?>
+            WHEN pkgitem_type='I' THEN <? value("image") ?>
+            WHEN pkgitem_type='M' THEN <? value("metasql") ?>
+            WHEN pkgitem_type='P' THEN <? value("priv") ?>
+            WHEN pkgitem_type='R' THEN <? value("report") ?>
+            WHEN pkgitem_type='S' THEN <? value("schema") ?>
+            WHEN pkgitem_type='T' THEN <? value("table") ?>
+            WHEN pkgitem_type='U' THEN <? value("uiform") ?>
+            WHEN pkgitem_type='V' THEN <? value("view") ?>
+            WHEN pkgitem_type='L' THEN <? value("folder") ?>
+            WHEN pkgitem_type='B' THEN <? value("database") ?>
+            WHEN pkgitem_type='C' THEN <? value("client") ?>
+       ELSE pkgitem_type END AS pkgitem_type_qtdisplayrole
+FROM (
+------ PACKAGE ------
+SELECT pkghead_id AS pkgitem_id, 0 AS seq,
+       0 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'P'::text AS pkgitem_type,
+       pkghead_name AS pkgitem_name,
+       pkghead_descrip AS pkgitem_descrip
+  FROM pkghead
+UNION
+
+------ CLIENT ------
+SELECT pkghead_id AS pkgitem_id, 1 AS seq,
+       1 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("client") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+------ COMMANDS ------
+SELECT pkghead_id AS pkgitem_id, 2 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("cmd") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION 
+SELECT cmd_id AS pkgitem_id, 3 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'D' AS pkgitem_type,
+       cmd_name AS pkgitem_name,
+       cmd_descrip AS pkgitem_descrip 
+  FROM cmd
+    JOIN pg_class ON (cmd.tableoid=pg_class.oid)
+    JOIN pg_namespace ON (relnamespace=pg_namespace.oid)
+UNION
+------ IMAGES ------
+SELECT pkghead_id AS pkgitem_id, 4 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("image") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION 
+SELECT image_id AS pkgitem_id, 5 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'I'::text AS pkgitem_type,
+       image_name AS pkgitem_name,
+       image_descrip AS pkgitem_descrip 
+  FROM image
+    JOIN pg_class ON (image.tableoid=pg_class.oid)
+    JOIN pg_namespace ON (relnamespace=pg_namespace.oid)
+UNION 
+------ METASQL ------
+SELECT pkghead_id AS pkgitem_id, 6 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("metasql") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+SELECT metasql_id AS pkgitem_id, 7 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'M' AS pkgitem_type,
+       metasql_group || '-' || metasql_name AS pkgitem_name,
+       metasql_notes AS pkgitem_descrip 
+  FROM metasql
+    JOIN pg_class ON (metasql.tableoid=pg_class.oid)
+    JOIN pg_namespace ON (relnamespace=pg_namespace.oid)
+UNION
+------ PRIVILEGES ------
+SELECT pkghead_id AS pkgitem_id, 8 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("priv") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+SELECT priv_id AS pkgitem_id, 9 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'P' AS pkgitem_type,
+       priv_module || '.' || priv_name AS pkgitem_name,
+       priv_descrip AS pkgitem_descrip 
+  FROM priv
+    JOIN pg_class ON (priv.tableoid=pg_class.oid)
+    JOIN pg_namespace ON (relnamespace=pg_namespace.oid)
+UNION 
+------ REPORTS ------
+SELECT pkghead_id AS pkgitem_id, 10 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("report") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+SELECT report_id AS pkgitem_id, 11 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'R' AS pkgitem_type,
+       report_name AS pkgitem_name,
+       report_descrip AS pkgitem_descrip 
+  FROM report
+    JOIN pg_class ON (report.tableoid=pg_class.oid)
+    JOIN pg_namespace ON (relnamespace=pg_namespace.oid) 
+UNION
+------ SCRIPTS ------
+SELECT pkghead_id AS pkgitem_id, 12 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("script") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+SELECT script_id AS pkgitem_id, 13 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'C'::text AS pkgitem_type,
+       script_name AS pkgitem_name,
+       script_notes AS pkgitem_descrip
+  FROM script
+    JOIN pg_class ON (script.tableoid=pg_class.oid)
+    JOIN pg_namespace ON (relnamespace=pg_namespace.oid)
+UNION
+------ SCREENS ------
+SELECT pkghead_id AS pkgitem_id, 14 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("uiform") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+SELECT uiform_id AS pkgitem_id, 15 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'U'::text AS pkgitem_type,
+       uiform_name AS pkgitem_name,
+       uiform_notes AS pkgitem_descrip
+  FROM uiform
+    JOIN pg_class ON (uiform.tableoid=pg_class.oid)
+    JOIN pg_namespace ON (relnamespace=pg_namespace.oid)
+UNION
+------ DATABASE ------
+SELECT pkghead_id AS pkgitem_id, 20 AS seq, 
+       1 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'B'::text AS pkgitem_type,
+       <? value("database") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+------ FUNCTIONS ------
+SELECT pkghead_id AS pkgitem_id, 21 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("procedure") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+SELECT pg_proc.oid AS pkgitem_id, 22 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'F' AS pkgitem_type,
+       proname || '(' || oidvectortypes(proargtypes)
+               || ')' AS pkgitem_name,
+       pg_catalog.obj_description(pg_proc.oid, 'pg_proc') AS pkgitem_descrip 
+  FROM pg_proc
+       JOIN pg_namespace ON (pronamespace=pg_namespace.oid)
+UNION
+------ SCHEMA ------
+SELECT pkghead_id AS pkgitem_id, 27 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("schema") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+SELECT n.oid AS pkgitem_id, 28 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'S' AS pkgitem_type,
+       nspname AS pkgitem_name,
+       pg_catalog.obj_description(n.oid, 'pg_namespace') AS pkgitem_descrip 
+  FROM pg_namespace n
+UNION
+------ TABLES ------
+SELECT pkghead_id AS pkgitem_id, 29 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("table") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+SELECT c.oid AS pkgitem_id, 30 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'T' AS pkgitem_type,
+       relname AS pkgitem_name,
+       pg_catalog.obj_description(c.oid, 'pg_class') AS pkgitem_descrip 
+  FROM pg_class c
+       JOIN pg_namespace ON (relnamespace=pg_namespace.oid)
+ WHERE ((relkind='r')
+   AND  (relname !~ '^pkg(cmd(arg)?|image|metasql|priv|report|script|uiform)$'))
+UNION
+------ TRIGGERS ------
+SELECT pkghead_id AS pkgitem_id, 31 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("trigger") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+SELECT t.oid AS pkgitem_id, 32 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'G' AS pkgitem_type,
+       tgname AS pkgitem_name,
+       pg_catalog.obj_description(t.oid, 'pg_trigger') AS pkgitem_descrip 
+  FROM pg_trigger t
+       JOIN pg_class ON (tgrelid=pg_class.oid)
+       JOIN pg_namespace ON (relnamespace=pg_namespace.oid)
+ WHERE (NOT tgconstraint)
+   AND  (tgname !~ '^pkg(cmd(arg)?|image|metasql|priv|report|script|uiform)')
+UNION
+------ VIEWS ------
+SELECT pkghead_id AS pkgitem_id, 33 AS seq,
+       2 AS xtindentrole,
+       pkghead_name AS pkgname,
+       'L'::text AS pkgitem_type,
+       <? value("view") ?> AS pkgitem_name,
+       '' AS pkgitem_descrip
+  FROM pkghead
+UNION
+SELECT c.oid AS pkgitem_id, 34 AS seq,
+       3 AS xtindentrole,
+       nspname AS pkgname,
+       'V' AS pkgitem_type,
+       relname AS pkgitem_name,
+       pg_catalog.obj_description(c.oid, 'pg_class') AS pkgitem_descrip 
+  FROM pg_class c
+       JOIN pg_namespace ON (relnamespace=pg_namespace.oid)
+ WHERE ((relkind='v'))
+) AS pkgitem 
+WHERE (pkgname NOT IN ('api','public','pg_catalog'))
+ORDER BY pkgname, seq, pkgitem_type_qtdisplayrole, pkgitem_name;

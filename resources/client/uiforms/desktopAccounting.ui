@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>desktopAccounting</class>
+ <widget class="QMainWindow" name="desktopAccounting">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>876</width>
+    <height>554</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Accounting</string>
+  </property>
+  <property name="documentMode">
+   <bool>true</bool>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowNestedDocks|QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="desktopAccountingLit">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Accounting</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2">
+     <widget class="QGroupBox" name="_apGroup">
+      <property name="title">
+       <string>Payables</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="MenuButton" name="_apAging">
+         <property name="image">
+          <string notr="true">taxes_clock_48</string>
+         </property>
+         <property name="label">
+          <string>Aging</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">ap.dspAPAging</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="MenuButton" name="_apWorkbench">
+         <property name="image">
+          <string notr="true">check_write_48</string>
+         </property>
+         <property name="label">
+          <string>Workbench</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">ap.workbench</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string>dspBillingSelections</string>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="MenuButton" name="_vendorWorkbench">
+         <property name="image">
+          <string notr="true">customers_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>Vendor</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">po.vendorWorkBench</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="1" rowspan="2">
+     <widget class="QGroupBox" name="_arGroup">
+      <property name="title">
+       <string>Receivables</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="MenuButton" name="_arAging">
+         <property name="image">
+          <string notr="true">collection_account_clock_48</string>
+         </property>
+         <property name="label">
+          <string>Aging</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">ar.dspARAging</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="MenuButton" name="_arWorkbench">
+         <property name="image">
+          <string notr="true">collection_account_write_48</string>
+         </property>
+         <property name="label">
+          <string>Workbench</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">ar.arWorkBench</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string>dspBillingSelections</string>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="MenuButton" name="_customerWorkbench">
+         <property name="image">
+          <string notr="true">customers_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>Customer</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">so.customerWorkbench</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QGroupBox" name="_glGroup">
+      <property name="title">
+       <string>General Ledger</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="2">
+        <widget class="MenuButton" name="_chartOfAccounts">
+         <property name="image">
+          <string notr="true">company_write_48</string>
+         </property>
+         <property name="label">
+          <string>Chart of Accounts</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">gl.accountNumbers</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="MenuButton" name="_budget">
+         <property name="image">
+          <string notr="true">reward_write_48</string>
+         </property>
+         <property name="label">
+          <string>Budget</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">gl.maintainBudgets</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="MenuButton" name="_standardJournal">
+         <property name="image">
+          <string notr="true">accounting_write_48</string>
+         </property>
+         <property name="label">
+          <string>Standard Journal</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">gl.listStandardJournals</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="MenuButton" name="_journalSeries">
+         <property name="image">
+          <string notr="true">accounting_ok_48</string>
+         </property>
+         <property name="label">
+          <string>Journal Series</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">gl.unpostedEntries</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="3">
+     <widget class="QGroupBox" name="_bankGroup">
+      <property name="title">
+       <string>Bank Accounts</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="MenuButton" name="_bankAdjustment">
+         <property name="image">
+          <string notr="true">bank_write_48</string>
+         </property>
+         <property name="label">
+          <string>Adjustment</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">gl.adjustmentEditList</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="MenuButton" name="_bankReconcile">
+         <property name="image">
+          <string notr="true">bank_ok_48</string>
+         </property>
+         <property name="label">
+          <string>Reconcile</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">gl.reconcileBankaccnt</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="2" colspan="2">
+     <widget class="QGroupBox" name="_reportGroup">
+      <property name="title">
+       <string>Reporting</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <property name="margin">
+        <number>6</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="2">
+        <widget class="MenuButton" name="_financialStatements">
+         <property name="image">
+          <string notr="true">spreadsheet_48</string>
+         </property>
+         <property name="label">
+          <string>Financial Statements</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">gl.viewFinancialReport</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="MenuButton" name="_trialBalance">
+         <property name="image">
+          <string notr="true">balance_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>Trial Balance</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">gl.dspTrialBalances</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="MenuButton" name="_glTransactions">
+         <property name="image">
+          <string notr="true">accounting_zoom_48</string>
+         </property>
+         <property name="label">
+          <string>Transactions</string>
+         </property>
+         <property name="actionName" stdset="0">
+          <string notr="true">gl.dspGLTransactions</string>
+         </property>
+         <property name="ui" stdset="0">
+          <string/>
+         </property>
+         <property name="editPrivilege" stdset="0">
+          <string/>
+         </property>
+         <property name="viewPrivilege" stdset="0">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QDockWidget" name="_dockBankBal">
+   <property name="windowTitle">
+    <string>Bank Accounts</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="_dockBankBalContents">
+    <layout class="QGridLayout" name="gridLayout_9">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="XTreeWidget" name="_bankBal">
+       <property name="populateLinear">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="_dockPayables">
+   <property name="windowTitle">
+    <string>Payables</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="_dockPayablesContents">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="XTreeWidget" name="_ap">
+       <property name="populateLinear">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="_dockReceivables">
+   <property name="windowTitle">
+    <string>Receivables</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="_dockReceivablesContents">
+    <layout class="QGridLayout" name="gridLayout_8">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="XTreeWidget" name="_ar">
+       <property name="populateLinear">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="_dockGLAccounts">
+   <property name="windowTitle">
+    <string>Monitored Accounts</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="_dockGlContents">
+    <layout class="QGridLayout" name="gridLayout_10">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>3</number>
+     </property>
+     <item row="0" column="0" colspan="4">
+      <widget class="XTreeWidget" name="_glAccounts">
+       <property name="populateLinear">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="_button1">
+       <property name="maximumSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>b</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QPushButton" name="_button2">
+       <property name="maximumSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>b</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MenuButton</class>
+   <extends>QWidget</extends>
+   <header>menubutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header>xtreewidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

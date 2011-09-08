@@ -1,0 +1,56 @@
+-- Group: desktop
+-- Name:  mfgAct
+-- Notes: 
+
+<? if exists("planned") ?> 
+SELECT 'L' AS activity, <? value("planned") ?> AS activity_qtdisplayrole, 0 AS seq,
+  COUNT(planord_id) AS count, COALESCE(sum(stdcost(item_id) * planord_qty),0) AS amount, 
+  sum(planord_qty) AS qty,
+  'curr' AS amount_xtnumericrole, 'qty' AS qty_xtnumericrole
+FROM planord
+  JOIN itemsite ON (planord_itemsite_id = itemsite_id)
+  JOIN item ON (itemsite_item_id = item_id)
+WHERE (planord_type = 'W')
+HAVING (COUNT(planord_id) > 0)
+UNION
+<? endif ?>
+SELECT 'O' AS activity, <? value("open") ?> AS activity_qtdisplayrole, 4 AS seq,   
+  COUNT(wo_id) AS count, 
+  SUM(round((wo_qtyord - wo_qtyrcv) * stdcost(itemsite_item_id),2)) AS amount, 
+  SUM(wo_qtyord - wo_qtyrcv) AS qty,
+  'curr' AS amount_xtnumericrole, 'qty' AS qty_xtnumericrole
+FROM wo
+  JOIN itemsite ON (wo_itemsite_id=itemsite_id)
+WHERE (wo_status = 'O')
+HAVING (COUNT(wo_id) > 0)
+UNION ALL
+SELECT 'E' AS activity, <? value("exploded") ?> AS activity_qtdisplayrole, 4 AS seq,   
+  COUNT(wo_id) AS count, 
+  SUM(round((wo_qtyord - wo_qtyrcv) * stdcost(itemsite_item_id),2)) AS amount, 
+  SUM(wo_qtyord - wo_qtyrcv) AS qty,
+  'curr' AS amount_xtnumericrole, 'qty' AS qty_xtnumericrole
+FROM wo
+  JOIN itemsite ON (wo_itemsite_id=itemsite_id)
+WHERE (wo_status = 'E')
+HAVING (COUNT(wo_id) > 0)
+UNION ALL
+SELECT 'R' AS activity, <? value("released") ?> AS activity_qtdisplayrole, 4 AS seq,   
+  COUNT(wo_id) AS count, 
+  SUM(round((wo_qtyord - wo_qtyrcv) * stdcost(itemsite_item_id),2)) AS amount, 
+  SUM(wo_qtyord - wo_qtyrcv) AS qty,
+  'curr' AS amount_xtnumericrole, 'qty' AS qty_xtnumericrole
+FROM wo
+  JOIN itemsite ON (wo_itemsite_id=itemsite_id)
+WHERE (wo_status = 'R')
+HAVING (COUNT(wo_id) > 0)
+UNION ALL
+SELECT 'I' AS activity, <? value("inprocess") ?> AS activity_qtdisplayrole, 4 AS seq,   
+  COUNT(wo_id) AS count, 
+  SUM(round((wo_qtyord - wo_qtyrcv) * stdcost(itemsite_item_id),2)) AS amount, 
+  SUM(wo_qtyord - wo_qtyrcv) AS qty,
+  'curr' AS amount_xtnumericrole, 'qty' AS qty_xtnumericrole
+FROM wo
+  JOIN itemsite ON (wo_itemsite_id=itemsite_id)
+WHERE (wo_status = 'I')
+HAVING (COUNT(wo_id) > 0)
+ORDER BY seq;

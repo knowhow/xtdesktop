@@ -1,0 +1,28 @@
+-- Group: desktop
+-- Name:  glaccountBal
+-- Notes: tweak
+SELECT accnt_id, formatGlAccount(accnt_id) AS accnt_id_qtdisplayrole, 
+ accnt_descrip, accnt_type,
+ CASE WHEN(accnt_type='A') THEN <? value("asset") ?>
+ WHEN(accnt_type='E') THEN <? value("expense") ?>
+ WHEN(accnt_type='L') THEN <? value("liability") ?>
+ WHEN(accnt_type='Q') THEN <? value("equity") ?>
+ WHEN(accnt_type='R') THEN <? value("revenue") ?>
+ ELSE accnt_type
+ END AS accnt_type_qtdisplayrole,
+ CASE WHEN(accnt_type IN ('A','E')) THEN trialbal_ending * -1 
+ ELSE trialbal_ending
+ END AS balance,
+ period_id,
+ 'curr' AS balance_xtnumericrole
+FROM accnt 
+JOIN trialbal ON (accnt_id=trialbal_accnt_id)
+JOIN (SELECT period_id
+      FROM period
+      JOIN yearperiod ON (period_yearperiod_id=yearperiod_id)
+      WHERE (period_end >= current_date)
+      ORDER BY yearperiod_end desc, period_number asc
+      LIMIT 1) data
+  ON (trialbal_period_id=period_id)
+WHERE (accnt_id IN (<? literal("accnt_id_list") ?>))
+ORDER BY accnt_company, accnt_profit, accnt_number, accnt_sub

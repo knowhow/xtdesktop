@@ -1,0 +1,269 @@
+<package id="resources"
+         name="xtdesktop"
+         developer="xTuple"
+         descrip="xTuple Desktop"
+         version="3.7.0"
+         updater="2.2.4">
+  <pkgnotes>
+        xTuple Desktop navigational interface for the xTuple main window.
+    
+        This package is an extension for xTuple ERP: PostBooks Edition,
+        a free and open source Enterprise Resource Planning software suite,
+        Copyright (c) 1999-2011 by OpenMFG LLC, d/b/a xTuple.
+        It is licensed to you under the Common Public Attribution License
+        version 1.0, the full text of which (including xTuple-specific Exhibits)
+        is available at www.xtuple.com/CPAL.  By using this software, you agree
+        to be bound by its terms.
+  </pkgnotes>
+
+  <prerequisite type="license">
+    <message>
+This package is an extension for xTuple ERP: PostBooks Edition, a free and open source Enterprise Resource Planning software suite, Copyright (c) 1999-2010 by OpenMFG LLC, d/b/a xTuple. It is licensed to you under the Common Public Attribution License version 1.0, the full text of which (including xTuple-specific Exhibits) is available at www.xtuple.com/CPAL.  By using this software, you agree to be bound by its terms.
+     </message>
+  </prerequisite>
+
+  <prerequisite type="Query"
+                name="Test xTuple ERP version">
+    <query>
+      SELECT (fetchMetricText('ServerVersion') >= '3.7.0');
+    </query>
+    <message>
+      This version of the xtdesktop package only works with xTuple ERP
+      versions 3.7.0 and greater.
+    </message>
+  </prerequisite>
+  
+ <loadpriv      name="ViewBankAccountsDock" module="Desktop">
+   Allows the user to view the Bank Accounts dock widget on the Desktop
+ </loadpriv>
+<loadpriv      name="ViewExtensionsDock" module="Desktop">
+   Allows the user to view the Extensions dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewGLAccountsDock" module="Desktop">
+   Allows the user to view Monitored General Ledger Accounts dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewManufactureActivitiesDock" module="Desktop">
+   Allows the user to view the Manufacture Activities dock widget on the Desktop
+ </loadpriv>
+  <loadpriv      name="ViewManufactureHistoryDock" module="Desktop">
+   Allows the user to view the Manufacture History dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewMyAccountsDock" module="Desktop">
+   Allows the user to view the My (CRM) Accounts dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewMyContactsDock" module="Desktop">
+   Allows the user to view the My Contact dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewTodoDock" module="Desktop">
+   Allows the user to view the To Do dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewPayablesDock" module="Desktop">
+   Allows the user to view the Payables dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewPurchaseActivitiesDock" module="Desktop">
+   Allows the user to view the Purchase Activities dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewPurchaseHistoryDock" module="Desktop">
+   Allows the user to view the Purchase History dock widget on the Desktop
+ </loadpriv>
+  <loadpriv      name="ViewPurchaseOrdersDock" module="Desktop">
+   Allows the user to view the open purchase orders dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewReceivablesDock" module="Desktop">
+   Allows the user to view the Purchase History dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewSalesActivitiesDock" module="Desktop">
+   Allows the user to view the Sales Activities dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewSalesHistoryDock" module="Desktop">
+   Allows the user to view the Sales History dock widget on the Desktop
+ </loadpriv>
+  <loadpriv      name="ViewSalesOrdersDock" module="Desktop">
+   Allows the user to view the Sales Orders dock widget on the Desktop
+ </loadpriv>
+  <loadpriv      name="ViewWorkOrdersDock" module="Desktop">
+   Allows the user to view the Work Orders dock widget on the Desktop
+ </loadpriv>
+ <loadpriv      name="ViewUsersOnlineDock" module="Desktop">
+   Allows the user to view the Users Online doc
+ </loadpriv>
+ 
+ <loadpriv      name="ViewCRMDesktop" module="Desktop">
+   Allows the user to view the CRM Desktop page
+ </loadpriv>
+ <loadpriv      name="ViewSalesDesktop" module="Desktop">
+   Allows the user to view the Sales Desktop page
+ </loadpriv>
+ <loadpriv      name="ViewPurchaseDesktop" module="Desktop">
+   Allows the user to view the Purchase Desktop page
+ </loadpriv>
+ <loadpriv      name="ViewManufactureDesktop" module="Desktop">
+   Allows the user to view the Manufacture Desktop page
+ </loadpriv>
+ <loadpriv      name="ViewAccountingDesktop" module="Desktop">
+   Allows the user to view the Accounting Desktop page
+ </loadpriv>
+ <loadpriv      name="ViewMaintenanceDesktop" module="Desktop">
+   Allows the user to view the Maintenance Desktop page
+ </loadpriv>
+  
+  <loadappscript  file="client/scripts/contact.js" name="contact" order="0"/>
+  <loadappscript  file="client/scripts/desktopNotice.js" name="desktopNotice" order="0"/>
+  <loadappscript  file="client/scripts/dockBankBal.js" name="dockBankBal" order="0"/>
+  <loadappscript  file="client/scripts/dockExtensions.js" name="dockExtensions" order="0"/>
+  <loadappscript  file="client/scripts/dockGLAccounts.js" name="dockGLAccounts" order="0"/>
+  <loadappscript  file="client/scripts/dockMfgActive.js" name="dockMfgActive" order="0"/>
+  <loadappscript  file="client/scripts/dockMfgHist.js" name="dockMfgHist" order="0"/>
+  <loadappscript  file="client/scripts/dockMfgOpen.js" name="dockMfgOpen" order="0"/>
+  <loadappscript  file="client/scripts/dockMyAccounts.js" name="dockMyAccounts" order="0"/>
+  <loadappscript  file="client/scripts/dockMyContacts.js" name="dockMyContacts" order="0"/>
+  <loadappscript  file="client/scripts/dockMyTodo.js" name="dockMyTodo" order="0"/>
+  <loadappscript  file="client/scripts/dockPayables.js" name="dockPayables" order="0"/>
+  <loadappscript  file="client/scripts/dockPurchActive.js" name="dockPurchActive" order="0"/>
+  <loadappscript  file="client/scripts/dockPurchHist.js" name="dockPurchHist" order="0"/>
+  <loadappscript  file="client/scripts/dockPurchOpen.js" name="dockPurchOpen" order="0"/>
+  <loadappscript  file="client/scripts/dockReceivables.js" name="dockReceivables" order="0"/>
+  <loadappscript  file="client/scripts/dockSalesActive.js" name="dockSalesActive" order="0"/>
+  <loadappscript  file="client/scripts/dockSalesHistory.js" name="dockSalesHistory" order="0"/>
+  <loadappscript  file="client/scripts/dockSalesOpen.js" name="dockSalesOpen" order="0"/>
+  <loadappscript  file="client/scripts/dockUserOnline.js" name="dockUserOnline" order="0"/>
+  <loadappscript  file="client/scripts/incident.js" name="incident" order="0"/>
+  <loadappscript  file="client/scripts/initMenu.js" name="initMenu" order="1"/>
+  <loadappscript  file="client/scripts/preferencesHistory.js" name="preferencesHistory" order="0"/>
+  <loadappscript  file="client/scripts/preferencesSelections.js" name="preferencesSelections" order="0"/>
+  <loadappscript  file="client/scripts/project.js" name="project" order="0"/>
+  <loadappscript  file="client/scripts/task.js" name="task" order="0"/>
+  <loadappscript  file="client/scripts/todoItem.js" name="todoItem" order="0"/>
+  <loadappscript  file="client/scripts/userPreferences.js" name="userPreferences" order="0"/>
+  
+  <loadappui      file="client/uiforms/desktopAccounting.ui" />
+  <loadappui      file="client/uiforms/desktopCRM.ui" />
+  <loadappui      file="client/uiforms/desktopMaintenance.ui" />
+  <loadappui      file="client/uiforms/desktopManufacture.ui" />
+  <loadappui      file="client/uiforms/desktopNotice.ui" />
+  <loadappui      file="client/uiforms/desktopPurchase.ui" />
+  <loadappui      file="client/uiforms/desktopSales.ui" />
+  <loadappui      file="client/uiforms/preferencesHistory.ui" />
+  <loadappui      file="client/uiforms/preferencesSelections.ui" />
+  
+  <loadmetasql file="client/metasql/desktop-bankBal.mql" />
+  <loadmetasql file="client/metasql/desktop-contacts.mql" />
+  <loadmetasql file="client/metasql/desktop-crmaccounts.mql" />
+  <loadmetasql file="client/metasql/desktop-getDates.mql" />
+  <loadmetasql file="client/metasql/desktop-glaccountBal.mql" />
+  <loadmetasql file="client/metasql/desktop-glaccounts.mql" />  
+  <loadmetasql file="client/metasql/desktop-glforwardupdate.mql" />
+  <loadmetasql file="client/metasql/desktop-mfgAct.mql" />
+  <loadmetasql file="client/metasql/desktop-mfgHist.mql" />
+  <loadmetasql file="client/metasql/desktop-mfgOpen.mql" />
+  <loadmetasql file="client/metasql/desktop-payables.mql" />
+  <loadmetasql file="client/metasql/desktop-pkgItems.mql" />
+  <loadmetasql file="client/metasql/desktop-purchAct.mql" />
+  <loadmetasql file="client/metasql/desktop-purchHist.mql" />
+  <loadmetasql file="client/metasql/desktop-purchOpen.mql" />
+  <loadmetasql file="client/metasql/desktop-receivables.mql" />
+  <loadmetasql file="client/metasql/desktop-salesAct.mql" />
+  <loadmetasql file="client/metasql/desktop-salesHist.mql" />
+  <loadmetasql file="client/metasql/desktop-salesOpen.mql" />
+  <loadmetasql file="client/metasql/desktop-todoDelete.mql" />
+  <loadmetasql file="client/metasql/desktop-todoList.mql" />
+  <loadmetasql file="client/metasql/desktop-userOnline.mql" />
+  
+  <createfunction file="database/functions/fetchwelcomehtml.sql"    name="fetchwelcomehtml" />
+  <finalscript file="database/misc/setMetrics.sql"  />
+  <finalscript file="database/misc/grantPrivileges.sql"  />
+
+  <loadimage      file="client/images/ImgUpArrow.png" name="ImgUpArrow" />
+  <loadimage      file="client/images/ImgRightArrow.png" name="ImgRightArrow" />
+  <loadimage      file="client/images/ImgDownArrow.png" name="ImgDownArrow" />
+  <loadimage      file="client/images/ImgLeftArrow.png" name="ImgLeftArrow" />
+
+  <loadimage      file="client/images/gear_16.png" name="gear_16" />
+  <loadimage      file="client/images/reload_16.png" name="reload_16" />
+
+  <loadimage      file="client/images/home_32.png" name="home_32" />
+  <loadimage      file="client/images/clients_32.png" name="clients_32" />
+  <loadimage      file="client/images/reward_32.png" name="reward_32" />
+  <loadimage      file="client/images/accounting_32.png" name="accounting_32" />
+  <loadimage      file="client/images/order_32.png" name="order_32" />
+  <loadimage      file="client/images/industry_32.png" name="industry_32" />
+  <loadimage      file="client/images/gear_32.png" name="gear_32" />
+
+  <loadimage      file="client/images/accounting_ok_48.png" name="accounting_ok_48"/>
+  <loadimage      file="client/images/accounting_write_48.png" name="accounting_write_48"/>
+  <loadimage      file="client/images/accounting_zoom_48.png" name="accounting_zoom_48"/>
+  <loadimage      file="client/images/availability_write_48.png" name="availability_write_48"/>
+  <loadimage      file="client/images/availability_zoom_48.png" name="availability_zoom_48"/>
+  <loadimage      file="client/images/balance_zoom_48.png" name="balance_zoom_48"/>
+  <loadimage      file="client/images/bank_ok_48.png" name="bank_ok_48"/>
+  <loadimage      file="client/images/bank_write_48.png" name="bank_write_48"/>
+  <loadimage      file="client/images/barcode_back_48.png" name="barcode_back_48"/>
+  <loadimage      file="client/images/barcode_ok_48.png" name="barcode_ok_48"/>
+  <loadimage      file="client/images/book_48.png" name="book_48"/>
+  <loadimage      file="client/images/cabinet_48.png" name="cabinet_48"/>
+  <loadimage      file="client/images/calculation_write_48.png" name="calculation_write_48"/>
+  <loadimage      file="client/images/calendar_month_zoom_48.png" name="calendar_month_zoom_48"/>
+  <loadimage      file="client/images/chat_48.png" name="chat_48"/>
+  <loadimage      file="client/images/check_ok_48.png" name="check_ok_48"/>
+  <loadimage      file="client/images/check_write_48.png" name="check_write_48"/>
+  <loadimage      file="client/images/check_zoom_48.png" name="check_zoom_48"/>
+  <loadimage      file="client/images/clients_48.png" name="clients_48"/>
+  <loadimage      file="client/images/coin_48.png" name="coin_48"/>
+  <loadimage      file="client/images/coin_clock_48.png" name="coin_clock_48"/>
+  <loadimage      file="client/images/coin_stack_zoom_48.png" name="coin_stack_zoom_48"/>
+  <loadimage      file="client/images/collection_account_clock_48.png" name="collection_account_clock_48"/>
+  <loadimage      file="client/images/collection_account_write_48.png" name="collection_account_write_48"/>
+  <loadimage      file="client/images/company_write_48.png" name="company_write_48"/>
+  <loadimage      file="client/images/customers_48.png" name="customers_48"/>
+  <loadimage      file="client/images/customers_add_48.png" name="customers_add_48"/>
+  <loadimage      file="client/images/customers_help_48.png" name="customers_help_48"/>
+  <loadimage      file="client/images/customers_write_48.png" name="customers_write_48"/>
+  <loadimage      file="client/images/customers_zoom_48.png" name="customers_zoom_48"/>
+  <loadimage      file="client/images/dispatch_order_ok_48.png" name="dispatch_order_ok_48"/>
+  <loadimage      file="client/images/dispatch_order_zoom_48.png" name="dispatch_order_zoom_48"/>
+  <loadimage      file="client/images/execute_48.png" name="execute_48"/>
+  <loadimage      file="client/images/export_database_write_48.png" name="export_database_write_48"/>
+  <loadimage      file="client/images/group_48.png" name="group_48"/>
+  <loadimage      file="client/images/history_zoom_48.png" name="history_zoom_48"/>
+  <loadimage      file="client/images/industry_add_48.png" name="industry_add_48"/>
+  <loadimage      file="client/images/industry_back_48.png" name="industry_back_48"/>
+  <loadimage      file="client/images/industry_clock_48.png" name="industry_clock_48"/>
+  <loadimage      file="client/images/industry_close_48.png" name="industry_close_48"/>
+  <loadimage      file="client/images/industry_next_48.png" name="industry_next_48"/>
+  <loadimage      file="client/images/industry_ok_48.png" name="industry_ok_48"/>
+  <loadimage      file="client/images/inventory_48.png" name="inventory_48"/>
+  <loadimage      file="client/images/inventory_categories_48.png" name="inventory_categories_48"/>
+  <loadimage      file="client/images/inventory_write_48.png" name="inventory_write_48"/>
+  <loadimage      file="client/images/inventory_zoom_48.png" name="inventory_zoom_48"/>
+  <loadimage      file="client/images/lamp_48.png" name="lamp_48"/>
+  <loadimage      file="client/images/money_bag_write_48.png" name="money_bag_write_48"/>
+  <loadimage      file="client/images/notepad_zoom_48.png" name="notepad_zoom_48"/>
+  <loadimage      file="client/images/order_add_48.png" name="order_add_48"/>
+  <loadimage      file="client/images/order_clock_48.png" name="order_clock_48"/>
+  <loadimage      file="client/images/order_help_48.png" name="order_help_48"/>
+  <loadimage      file="client/images/order_next_48.png" name="order_next_48"/>
+  <loadimage      file="client/images/order_search_48.png" name="order_search_48"/>
+  <loadimage      file="client/images/order_write_48.png" name="order_write_48"/>
+  <loadimage      file="client/images/order_zoom_48.png" name="order_zoom_48"/>
+  <loadimage      file="client/images/payment_ok_48.png" name="payment_ok_48"/>
+  <loadimage      file="client/images/printer_48.png" name="printer_48"/>
+  <loadimage      file="client/images/reward_clock_48.png" name="reward_clock_48"/>
+  <loadimage      file="client/images/reward_write_48.png" name="reward_write_48"/>
+  <loadimage      file="client/images/script_write_48.png" name="script_write_48"/>
+  <loadimage      file="client/images/spreadsheet_48.png" name="spreadsheet_48"/>
+  <loadimage      file="client/images/spreadsheet_write_48.png" name="spreadsheet_write_48"/>
+  <loadimage      file="client/images/spreadsheet_zoom_48.png" name="spreadsheet_zoom_48"/>
+  <loadimage      file="client/images/stamp_48.png" name="stamp_48"/>
+  <loadimage      file="client/images/stamp_zoom_48.png" name="stamp_zoom_48"/>
+  <loadimage      file="client/images/store_house_48.png" name="store_house_48"/>
+  <loadimage      file="client/images/taxes_add_48.png" name="taxes_add_48"/>
+  <loadimage      file="client/images/taxes_clock_48.png" name="taxes_clock_48"/>
+  <loadimage      file="client/images/taxes_ok_48.png" name="taxes_ok_48"/>
+  <loadimage      file="client/images/taxes_zoom_48.png" name="taxes_zoom_48"/>
+  <loadimage      file="client/images/time_sheet_write_48.png" name="time_sheet_write_48"/>
+  <loadimage      file="client/images/trash_ok_48.png" name="trash_ok_48"/>
+  <loadimage      file="client/images/user_48.png" name="user_48"/>
+  <loadimage      file="client/images/window_write_48.png" name="window_write_48"/>
+
+
+</package>

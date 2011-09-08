@@ -1,0 +1,42 @@
+Release Notes
+xTuple Desktop (xtDdesktop)
+Version 3.5.1
+July 2, 2010
+==================================
+
+This is the final release of the 3.5.1 xTuple Desktop package,
+a free and open source extension package for xTuple ERP (PostBooks, 
+Standard, and Manufacturing Editions). 
+
+xtDesktop is available under the same Common Public Attribution 
+License (CPAL) as the PostBooks Edition of xTuple ERP 
+(www.xtuple.com/CPAL). For more information on xTuple's extension 
+package architecture, please see www.xtuple.org/developer-zone.
+
+==================================
+
+The following features and bug fixes have been added to the
+package since 3.5.1RC. Additional detail for each item listed below
+may be found on our community website (www.xtuple.org). Simply go
+to the xtPOS project on the Issue Tracker and select the
+"Changelog" option.
+
+
+New Features:
+
+* [Architectural] Change icon for Setup to a top hat with a wand 
+and sparkles and change the name to QuickStart
+
+Bug Fixes:
+
+* [Accounting] “Monitored Accounts” dock doesn't display the 
+accounts
+* [Architectural] Icons on left toolbar are 24 pixels on windows 
+* [Architectural] Remove extra icons from base package 
+* [Architectural] Need .ts file for desktop 
+* [Maintenance] Site button does not work on commercial editions 
+when multi-warehouse is off 
+* [Setup] Omnibus: launch list screens by default 
+* [Setup] Enter sites link opens item sites lis
+* [Setup] Irrelevant screen is displayed on selecting “Enter 
+Opportunity Sources” button 

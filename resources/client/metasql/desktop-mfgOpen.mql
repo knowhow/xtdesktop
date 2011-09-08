@@ -1,0 +1,36 @@
+-- Group: desktop
+-- Name:  mfgOpen
+-- Notes: 
+SELECT wo_id,
+       CASE WHEN (wo_ordid IS NULL) THEN -1
+            ELSE wo_ordid
+       END AS orderid, wo_status,
+       CASE WHEN (wo_status = 'E') THEN <? value("exploded") ?>
+         WHEN (wo_status = 'I') THEN <? value("inprocess") ?>
+         WHEN (wo_status = 'R') THEN <? value("released") ?>
+         WHEN (wo_status = 'O') THEN <? value("open") ?>
+       END AS wo_status_qtdisplayrole, 
+       warehous_code, uom_name,
+       item_number, (item_descrip1 || ' ' || item_descrip2) AS itemdescrip,
+       wo_qtyord, wo_qtyrcv, wo_startdate, wo_duedate,
+       wo_number::TEXT || '-' || wo_subnumber::TEXT AS wonumber,
+       wo_postedvalue, wo_wipvalue,
+       'qty' AS wo_qtyord_xtnumericrole,
+       'qty' AS wo_qtyrcv_xtnumericrole,
+       'curr' AS wo_postedvalue_xtnumericrole,
+       'curr' AS wo_wipvalue_xtnumericrole,
+       CASE WHEN ((wo_startdate<=CURRENT_DATE) AND (wo_status IN ('O','E','S','R'))) THEN 'error'
+       END AS wo_startdate_qtforegroundrole,
+       CASE WHEN (wo_duedate<=CURRENT_DATE) THEN 'error'
+       END AS wo_duedate_qtforegroundrole,
+       CASE WHEN (wo_duedate<=CURRENT_DATE) THEN 'Overdue'
+            ELSE 'On Time'
+       END AS condition,
+       CASE WHEN (wo_duedate<=CURRENT_DATE) THEN 'error' END AS condition_qtforegroundrole
+FROM wo
+  JOIN itemsite ON (wo_itemsite_id=itemsite_id)
+  JOIN warehous ON (itemsite_warehous_id=warehous_id)
+  JOIN item ON (itemsite_item_id=item_id)
+  JOIN uom ON (item_inv_uom_id=uom_id)
+WHERE (wo_status != 'C')
+ORDER BY wo_number, wo_subnumber;

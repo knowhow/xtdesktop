@@ -1,0 +1,23 @@
+-- Group: desktop
+-- Name:  mfgHist
+-- Notes: Summarized Manufacture History for Desktop
+
+SELECT <? literal("group_id") ?>, <? literal("group_number") ?>,  <? literal("group_name") ?>,
+       sum(invhist_value_after-invhist_value_before) as amount, sum(invhist_qoh_after-invhist_qoh_before) AS qty,
+       'curr' AS amount_xtnumericrole,
+       'qty' AS qty_xtnumericrole,
+       0 AS amount_xttotalrole,
+       0 AS qty_xttotalrole
+FROM invhist
+  JOIN itemsite ON (itemsite_id=invhist_itemsite_id)
+  JOIN plancode ON (plancode_id=itemsite_plancode_id)
+  JOIN item ON (item_id=itemsite_item_id)
+  JOIN classcode ON (classcode_id=item_classcode_id)
+WHERE ((invhist_transtype = 'RM')
+  AND (invhist_ordtype = 'WO')
+  AND ((invhist_transdate > DATE <? value("startDate") ?> - 1 AND
+        invhist_transdate < DATE <? value("endDate") ?> + 1) )
+)
+GROUP BY <? literal("group_id") ?>, <? literal("group_number") ?>, <? literal("group_name") ?>
+ORDER BY <? literal("group_number") ?>
+;

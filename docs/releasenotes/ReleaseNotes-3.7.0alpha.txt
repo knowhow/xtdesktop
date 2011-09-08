@@ -1,0 +1,31 @@
+Release Notes
+xTuple Desktop (xtDesktop)
+Version 3.7.0alpha
+January 31, 2010
+==================================
+
+This is the release candidate of the 3.7.0 xTuple Desktop package,
+a free and open source extension package for xTuple ERP (PostBooks, 
+Standard, and Manufacturing Editions). 
+
+xtDesktop is available under the same Common Public Attribution 
+License (CPAL) as the PostBooks Edition of xTuple ERP 
+(www.xtuple.com/CPAL). For more information on xTuple's extension 
+package architecture, please see www.xtuple.org/developer-zone.
+
+==================================
+
+Changes to the desktop in this release are exclusively to support 
+core changes in xTuple 3.7.0.  Core changes made that affect the 
+desktop are listed below. Additional detail for each item listed below
+may be found on our community website (www.xtuple.org).
+
+Support for New Features in 3.7:
+
+* [Manufacture] Consolidate Work Order Schedule Reports
+* [Inventory] Consolidate Inventory Availability Reports
+* [Sales] Consolidate Sales History Reports
+* [Sales] Consolidate Bookings Reports
+* [System] License Manager enhancement/policy changes for 3.7
+
+

@@ -1,0 +1,10 @@
+-- Group: desktop
+-- Name:  payables
+-- Notes: 
+SELECT formatMoney(sum(apaging_cur_val)) AS cur_val,
+  formatMoney(sum(apaging_thirty_val)) AS thirty_val,
+  formatMoney(sum(apaging_sixty_val)) AS sixty_val,
+  formatMoney(sum(apaging_ninety_val)) AS ninety_val,
+  formatMoney(sum(apaging_plus_val)) AS plus_val,
+  formatMoney(sum(apaging_total_val)) AS total_val  
+FROM apaging(current_date, false);
