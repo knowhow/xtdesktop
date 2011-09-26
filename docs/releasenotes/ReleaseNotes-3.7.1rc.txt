@@ -1,0 +1,26 @@
+Release Notes
+xTuple Desktop (xtDesktop)
+Version 3.7.1rc
+September 26, 2011
+==================================
+
+This is the release candidate of the 3.7.1 xTuple Desktop package,
+a free and open source extension package for xTuple ERP (PostBooks, 
+Standard, and Manufacturing Editions). 
+
+xtDesktop is available under the same Common Public Attribution 
+License (CPAL) as the PostBooks Edition of xTuple ERP 
+(www.xtuple.com/CPAL). For more information on xTuple's extension 
+package architecture, please see www.xtuple.org/developer-zone.
+
+==================================
+
+Bug fixes in xtdesktop 3.7.1rc:
+
+* 'Open' option in the Purchase Activities doc is unresponsive
+  [14667]
+* 'Open' option in the Manufacture Activities dock is unresponsive
+  [14673]
+* 'User Information' screen is opened in view mode [15486]
+* Clicking on Maintenance Desktop generates DB log error [15493]
+* Sales history query uses cohist_shipdate [15010]
