@@ -12,11 +12,17 @@ include("dockMyContacts");
 
 // Connect this window so that the My Contacts dock list gets updated
 var _contactList = mainwindow.findChild("_contactList");
-var _save = mywindow.findChild("_save");
 
 // Connect this window so that the My Contacts dock list gets updated
-toolbox.coreDisconnect(_save, "clicked()", mydialog, "sSave()");
-_save.clicked.connect(save);
+//new method for buttonbox, added for 3.8
+  var _buttonBox = mywindow.findChild("_buttonBox");
+  toolbox.coreDisconnect(_buttonBox, "accepted()", mywindow, "sSave()");
+  _buttonBox.accepted.connect(save);
+
+//method prior to 3.8 core release
+//var _save = mywindow.findChild("_save");
+//toolbox.coreDisconnect(_save, "clicked()", mydialog, "sSave()");
+//_save.clicked.connect(save);
 
 function save()
 {
