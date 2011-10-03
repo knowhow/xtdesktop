@@ -1,5 +1,3 @@
 select setMetric('desktop/welcome',
-                 'http://welcome.xtuple.org/index.html?' ||
-                 'ServerVersion=' || fetchmetrictext('ServerVersion') || '&' ||
-                 'Application=' || fetchmetrictext('Application') );
+                 'http://redmine.bring.out.ba/projects/knowhow');
 select setMetric('desktop/timer','900000');
